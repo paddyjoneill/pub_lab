@@ -33,7 +33,9 @@ class CustomerTest < MiniTest::Test
     assert_equal(5, @customer.drunkness)
   end
 
-  
+  def test_can_decrease_drunkness
+
+  end
 
 
 end

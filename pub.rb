@@ -26,10 +26,12 @@ class Pub
   end
 
   def sell_drink(drink, customer)
-    customer.decrease_money_in_wallet(drink.price)
-    @till += drink.price
-    @drinks.delete(drink)
-    customer.increase_drunkness(drink)
+    if customer.wallet >= drink.price && customer.age >= 18 && customer.drunkness < 4
+      customer.decrease_money_in_wallet(drink.price)
+      @till += drink.price
+      @drinks.delete(drink)
+      customer.increase_drunkness(drink)
+    end
 
   end
 

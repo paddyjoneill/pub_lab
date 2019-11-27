@@ -13,6 +13,8 @@ class PubTest < MiniTest::Test
     @drink2 = Drink.new("white wine", 5, 4)
     @drink3 = Drink.new("beer", 5, 3)
     @customer = Customer.new("Paddy", 30, 35)
+    @customer1 = Customer.new("Stephen", 0, 25)
+    @customer2 = Customer.new("Barry", 50, 17)
     @pub = Pub.new("Catherine's Bar", 200, [@drink1, @drink2, @drink3])
   end
 
@@ -33,7 +35,7 @@ class PubTest < MiniTest::Test
   end
 
   def test_customer_does_not_have_enough_money
-    @customer1 = Customer.new("Stephen", 0, 25)
+    # @customer1 = Customer.new("Stephen", 0, 25)
     assert_equal(false, @customer1.can_afford_drink(@drink1))
   end
 
@@ -59,6 +61,31 @@ class PubTest < MiniTest::Test
   def test_sell_drink_to_a_customer
     @pub.sell_drink(@drink1, @customer)
     assert_equal(24,@customer.wallet())
+    assert_equal(206, @pub.till_balance)
+    assert_equal([@drink2, @drink3], @pub.check_stock)
+    assert_equal(5, @customer.drunkness)
+  end
+
+  def test_try_sell_drink_but_customer_not_enough_money
+    @pub.sell_drink(@drink1, @customer1)
+    assert_equal(0,@customer1.wallet())
+    assert_equal(200, @pub.till_balance)
+    assert_equal([@drink1, @drink2, @drink3], @pub.check_stock)
+    assert_equal(0, @customer1.drunkness)
+  end
+
+  def test_try_sell_drink_but_customer_not_old_enough
+    @pub.sell_drink(@drink1, @customer2)
+    assert_equal(50, @customer2.wallet())
+    assert_equal(200, @pub.till_balance)
+    assert_equal([@drink1, @drink2, @drink3], @pub.check_stock)
+    assert_equal(0, @customer2.drunkness)
+  end
+
+  def test_try_sell_drink_but_customer_too_drunk
+    @pub.sell_drink(@drink1, @customer)
+    @pub.sell_drink(@drink2, @customer)
+    assert_equal(24, @customer.wallet())
     assert_equal(206, @pub.till_balance)
     assert_equal([@drink2, @drink3], @pub.check_stock)
     assert_equal(5, @customer.drunkness)
