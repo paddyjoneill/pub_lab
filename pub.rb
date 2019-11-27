@@ -16,6 +16,13 @@ class Pub
     @till += amount
   end
 
+  def check_stock
+    return @drinks
+  end
 
+  def remove_drink(drink)
+    @drinks.delete(drink)
+    return nil
+  end
 
 end

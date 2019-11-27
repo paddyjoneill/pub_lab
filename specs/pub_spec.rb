@@ -28,4 +28,13 @@ class PubTest < MiniTest::Test
     assert_equal(205, @pub.take_payment(5))
   end
 
+  def test_check_initial_stock
+    assert_equal([@drink1, @drink2, @drink3], @pub.check_stock)
+  end
+
+  def test_can_remove_drink_when_sold
+    @pub.remove_drink(@drink3)
+    assert_equal([@drink1, @drink2], @pub.check_stock)
+  end
+
 end
