@@ -25,4 +25,12 @@ class Pub
     return nil
   end
 
+  def sell_drink(drink, customer)
+    customer.decrease_money_in_wallet(drink.price)
+    @till += drink.price
+    @drinks.delete(drink)
+    customer.increase_drunkness(drink)
+
+  end
+
 end
