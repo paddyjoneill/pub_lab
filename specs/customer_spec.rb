@@ -7,5 +7,23 @@ require_relative('../customer.rb')
 
 class CustomerTest < MiniTest::Test
 
+  def setup
+    @customer = Customer.new("Paddy", 30, 35)
+  end
+
+  def test_customer_has_a_name
+    assert_equal("Paddy",@customer.name)
+  end
+
+  def test_customer_has_a_wallet
+    assert_equal(30, @customer.wallet)
+  end
+
+  def test_customer_has_an_age
+    assert_equal(35, @customer.age)
+  end
+
+
+
 
 end
