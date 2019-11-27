@@ -10,16 +10,29 @@ def setup
   @drink = Drink.new("red wine", 6, 5)
 end
 
+# def test_drink_has_name
+#   assert_equal("red wine", @drink.name)
+# end
+#
+# def test_drink_has_price
+#   assert_equal(6, @drink.price)
+# end
+#
+# def test_drink_has_alcohol_level
+#   assert_equal(5, @drink.alcohol_level)
+# end
+
 def test_drink_has_name
-  assert_equal("red wine", @drink.name)
+
+  assert_equal("red wine", @drink)
 end
 
 def test_drink_has_price
-  assert_equal(6, @drink.price)
+  assert_equal(6, @drink)
 end
 
 def test_drink_has_alcohol_level
-  assert_equal(5, @drink.alcohol_level)
+  assert_equal(5, @drink)
 end
 
 end

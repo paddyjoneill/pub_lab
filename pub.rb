@@ -6,6 +6,12 @@ class Pub
     @name = name
     @till = till
     @drinks = drinks
+
+    # @drinks = Hash.new([])
+    # for drink in drinks
+    #   @drinks[drink.name].push(drink)
+    # end
+
     @food = food
   end
 
