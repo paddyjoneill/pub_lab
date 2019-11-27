@@ -2,10 +2,11 @@ class Pub
 
   attr_reader :name
 
-  def initialize(name, till, drinks = [])
+  def initialize(name, till, drinks, food)
     @name = name
     @till = till
     @drinks = drinks
+    @food = food
   end
 
   def till_balance
@@ -20,6 +21,10 @@ class Pub
     return @drinks
   end
 
+  def check_food_stock
+    return @food
+  end
+
   def remove_drink(drink)
     @drinks.delete(drink)
     return nil
@@ -32,7 +37,15 @@ class Pub
       @drinks.delete(drink)
       customer.increase_drunkness(drink)
     end
+  end
 
+  def sell_food(food, customer)
+    if customer.wallet >= food.price
+      customer.decrease_money_in_wallet(food.price)
+      @till += food.price
+      customer.decrease_drunkness(food)
+      @food.delete(food)
+    end
   end
 
 end

@@ -5,6 +5,7 @@ Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 require_relative('../drink.rb')
 require_relative('../customer.rb')
 require_relative('../pub.rb')
+require_relative('../food.rb')
 
 class PubTest < MiniTest::Test
 
@@ -15,7 +16,10 @@ class PubTest < MiniTest::Test
     @customer = Customer.new("Paddy", 30, 35)
     @customer1 = Customer.new("Stephen", 0, 25)
     @customer2 = Customer.new("Barry", 50, 17)
-    @pub = Pub.new("Catherine's Bar", 200, [@drink1, @drink2, @drink3])
+    @food1 = Food.new("Burger", 10, 3)
+    @food2 = Food.new("Cheese Burger", 12, 4)
+    @food3 = Food.new("Chips", 5, 2)
+    @pub = Pub.new("Catherine's Bar", 200, [@drink1, @drink2, @drink3], [@food1, @food2, @food3])
   end
 
   def test_pub_has_name
@@ -89,6 +93,16 @@ class PubTest < MiniTest::Test
     assert_equal(206, @pub.till_balance)
     assert_equal([@drink2, @drink3], @pub.check_stock)
     assert_equal(5, @customer.drunkness)
+  end
+
+  def test_sell_customer_food
+    @pub.sell_drink(@drink1, @customer)
+    @pub.sell_food(@food1, @customer)
+    assert_equal(14, @customer.wallet())
+    assert_equal(216, @pub.till_balance)
+    assert_equal([@drink2, @drink3], @pub.check_stock)
+    assert_equal(2, @customer.drunkness)
+    assert_equal([@food2, @food3], @pub.check_food_stock)
   end
 
 end
