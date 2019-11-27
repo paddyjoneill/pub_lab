@@ -24,4 +24,8 @@ class PubTest < MiniTest::Test
     assert_equal(200, @pub.till_balance)
   end
 
+  def test_can_take_payment
+    assert_equal(205, @pub.take_payment(5))
+  end
+
 end

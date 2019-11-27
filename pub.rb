@@ -9,7 +9,13 @@ class Pub
   end
 
   def till_balance
-
+    return @till
   end
+
+  def take_payment(amount)
+    @till += amount
+  end
+
+
 
 end
