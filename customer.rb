@@ -9,5 +9,8 @@ class Customer
     @drunkness = 0
   end
 
+  def decrease_money_in_wallet(amount)
+    @wallet -= amount
+  end
 
 end

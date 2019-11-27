@@ -23,7 +23,9 @@ class CustomerTest < MiniTest::Test
     assert_equal(35, @customer.age)
   end
 
-
+  def test_can_remove_money_from_wallet
+    assert_equal(25, @customer.decrease_money_in_wallet(5))
+  end
 
 
 end
