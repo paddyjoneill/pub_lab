@@ -17,6 +17,10 @@ class Customer
     @drunkness += drink.alcohol_level
   end
 
+  def decrease_drunkness(food)
+    @drunkness -= food.rejuvination_level
+  end
+  
   def can_afford_drink(drink)
     if @wallet >= drink.price
       return true
